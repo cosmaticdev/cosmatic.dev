@@ -1,0 +1,28 @@
+# Ignore Python bytecode and other compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Ignore virtual environments
+env/
+venv/
+
+# Ignore Python-specific logs and metadata
+*.log
+*.egg-info/
+.eggs/
+
+# Ignore development IDE/editor settings
+.vscode/
+.idea/
+*.swp
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore params.json and data.json
+params.json
+data.json
+
+# Ignore everything in the "files" folder
+files/
