@@ -209,11 +209,11 @@
 
 <body>
     <main>
-        <!--
+
         <header id="header">
             <h1 style="padding-top: 0px;" id="time-display">currentTime</h1>
         </header>
-        -->
+
 
         <div id='stars'></div>
         <div id='stars2'></div>
@@ -326,6 +326,27 @@
         </div>
 
         <script>
+            function startTimestampCounter(timestamp) {
+                const timeDisplay = document.getElementById('time-display');
+
+                // Convert the timestamp to a Date object
+                let localDate = new Date(timestamp);
+
+                // Update the displayed time every second
+                function updateTime() {
+                    timeDisplay.textContent = localDate.toLocaleTimeString(); // Display the local time
+                    localDate.setSeconds(localDate.getSeconds() + 1); // Increment the time by 1 second
+                }
+
+                // Start the interval to update time every second
+                updateTime(); // Update immediately
+                setInterval(updateTime, 1000); // Update every second
+            }
+
+            // Example: Provide a timestamp in milliseconds
+            const exampleTimestamp = Date.now(); // Replace this with your desired timestamp
+            startTimestampCounter(exampleTimestamp);
+
 
             async function loadData() {
                 try {
