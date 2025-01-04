@@ -3,7 +3,7 @@ import json
 import websockets
 from pathlib import Path
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 import ssl, os
 
@@ -13,6 +13,13 @@ app = FastAPI()
 tasks = {}
 
 import updateData
+
+
+@app.get("/data.json")
+async def getData():
+    with open("static/data.json") as f:
+        data = json.loads(f.read())
+    return JSONResponse(data)
 
 
 @app.get("/{page_name}")

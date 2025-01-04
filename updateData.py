@@ -1,9 +1,10 @@
 import json, requests, os, time
 import psutil
 import subprocess
+import speedtest
 
-if not os.path.exists("data.json"):
-    with open("data.json", "w") as f:
+if not os.path.exists("static/data.json"):
+    with open("static/data.json", "w") as f:
         f.write("{}")
 
 if not os.path.exists("params.json"):
@@ -151,10 +152,12 @@ def computerStorage():
 def get_cpu_info():
     # Get CPU info
     cpu_info = {
-        "CPU Usage": f"{psutil.cpu_percent(interval=1)}%",
-        "CPU Frequency": f"{psutil.cpu_freq().current:.2f} MHz",
-        "CPU Cores": psutil.cpu_count(logical=False),
-        "Logical CPUs": psutil.cpu_count(logical=True),
+        "CPUInfo": {
+            "CPU Usage": f"{psutil.cpu_percent(interval=1)}%",
+            "CPU Frequency": f"{psutil.cpu_freq().current:.2f} MHz",
+            "CPU Cores": psutil.cpu_count(logical=False),
+            "Logical CPUs": psutil.cpu_count(logical=True),
+        }
     }
     return cpu_info
 
@@ -163,12 +166,36 @@ def get_ram_info():
     # Get RAM info
     ram = psutil.virtual_memory()
     ram_info = {
-        "Total RAM": f"{ram.total / (1024 ** 2):.2f} MB",
-        "Used RAM": f"{ram.used / (1024 ** 2):.2f} MB",
-        "Free RAM": f"{ram.free / (1024 ** 2):.2f} MB",
-        "RAM Usage": f"{ram.percent}%",
+        "RAMInfo": {
+            "Total RAM": f"{ram.total / (1024 ** 2):.2f} MB",
+            "Used RAM": f"{ram.used / (1024 ** 2):.2f} MB",
+            "Free RAM": f"{ram.free / (1024 ** 2):.2f} MB",
+            "RAM Usage": f"{ram.percent}%",
+        }
     }
     return ram_info
+
+
+def wifiSpeed():
+    st = speedtest.Speedtest()
+
+    # Get the best server based on ping
+    st.get_best_server()
+
+    # Perform download and upload speed tests
+    download_speed = st.download() / 1_000_000  # Convert from bits to megabits
+    upload_speed = st.upload() / 1_000_000  # Convert from bits to megabits
+
+    # Get ping
+    ping = st.results.ping
+
+    return {
+        "wifiSpeed": {
+            "Download Speed (Mbps)": download_speed,
+            "Upload Speed (Mbps)": upload_speed,
+            "Ping (ms)": ping,
+        }
+    }
 
 
 def getSiegeStats(username):
@@ -191,8 +218,9 @@ def getAllData():
     data.update(computerStorage())
     data.update(get_cpu_info())
     data.update(get_ram_info())
+    # data.update(wifiSpeed()) #currently experiencing issues
 
-    with open("data.json", "w") as f:
+    with open("static/data.json", "w") as f:
         f.write(json.dumps(data, indent=3))
 
 

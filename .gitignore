@@ -22,7 +22,10 @@ venv/
 
 # Ignore params.json and data.json
 params.json
-data.json
+static/data.json
 
 # Ignore everything in the "files" folder
 files/
+
+#ignore the runner (still in progress, not for release)
+runner.py
