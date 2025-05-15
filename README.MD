@@ -163,8 +163,8 @@ git pull https://github.com/cosmaticdev/cosmatic.dev
 And then make a python venv and opening it
 ```
 cd cosmatic.dev
-virtualenv venv --distribute
-source venv/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 Then finally giving the code a trial run. This is going to crash, we havn't installed packages yet, but it should prompt us to install automatically!
 ```
@@ -330,12 +330,15 @@ Paste the following into the file, filling in any data when needed
 ```
 [Unit]
 Description=Server Runner
-After=network.target
+After=network-online.target
+Wants=network-online.target
+
 
 [Service]
 Type=simple
 User=YOUR_LOCAL_USER_NAME
 WorkingDirectory=/home/YOUR_LOCAL_USER_NAME/cosmatic.dev
+ExecStartPre=/bin/sleep 15
 ExecStart=/home/YOUR_LOCAL_USER_NAME/cosmatic.dev/.venv/bin/python /home/YOUR_LOCAL_USER_NAME/cosmatic.dev/server.py
 Restart=always
 
