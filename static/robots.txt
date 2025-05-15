@@ -1,0 +1,43 @@
+# Allow only the root page and /stats
+User-agent: *
+Disallow: /
+Allow: /$
+Allow: /stats
+
+# Block known AI crawlers
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+# Allow social media bots to crawl for embeds/previews
+User-agent: Twitterbot
+Disallow:
+
+User-agent: FacebookExternalHit
+Disallow:
+
+User-agent: LinkedInBot
+Disallow:
+
+User-agent: Pinterestbot
+Disallow:
+
+User-agent: Slackbot
+Disallow:
+
+User-agent: Discordbot
+Disallow:

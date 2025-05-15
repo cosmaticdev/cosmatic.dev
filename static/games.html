@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stats | cosmatic.dev</title>
+    <meta name="description"
+        content="Personal website for updates, info, stats, and projects revolving around my work and life.">
+    <link rel="canonical" href="https://cosmatic.dev/games" />
+
+    <meta property="og:title" content="Stats | cosmatic.dev">
+    <meta property="og:description"
+        content="Personal website for updates, info, stats, and projects revolving around my work and life.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cosmatic.dev/games">
+    <meta property="og:image" content="https://cosmatic.dev/static/images/pfp.webp">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Stats | cosmatic.dev">
+    <meta name="twitter:description"
+        content="Personal website for updates, info, stats, and projects revolving around my work and life.">
+    <meta name="twitter:image" content="https://cosmatic.dev/static/images/pfp.webp">
+
+    <meta name="robots" content="index, follow">
+
+    <meta name="author" content="cosmatic">
+
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" sizes="16x16" href="/static/images/icons/favicon-16x16.png">
+    <link rel="icon" sizes="32x32" href="/static/images/icons/favicon-32x32.png">
+    <link rel="icon" sizes="48x48" href="/static/images/icons/favicon-48x48.png">
+    <link rel="icon" sizes="192x192" href="/static/images/icons/favicon-192x192.png">
+
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Stats | cosmatic.dev",
+    "url": "https://cosmatic.dev/games",
+    "description": "Personal website for updates, info, stats, and projects revolving around my work and life."
+    }
+    </script>
+
+    <link rel="stylesheet" href="/static/css/games.css">
+    <link rel="stylesheet" href="/static/css/snow.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <main>
+        <a class="github-button" href="https://github.com/cosmaticdev/cosmatic.dev" target="_blank" rel="noopener">
+            <span class="github-icon">
+                <svg viewBox="0 0 16 16" version="1.1" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 
+                              2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 
+                              0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 
+                              1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 
+                              0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 
+                              0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 
+                              0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 
+                              1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 
+                              0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 
+                              1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 
+                              8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                </svg>
+            </span>
+            View on GitHub
+        </a>
+
+        <div
+            style="display: flex; flex-direction: row; align-items: flex-end; text-align: center; justify-content: right; padding-right: 50px; padding-left: 50px; padding-top: 5px; padding-bottom: 0px;">
+            <h2 style="padding-right: 10px;">Connection Status </h2>
+            <svg id="serverConnection" width="24" height="24" viewBox="0 0 16 16" fill="#ff1100"
+                xmlns="http://www.w3.org/2000/svg" fill-opacity="0.8" style="padding-right: 30px;">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <circle cx="8" cy="8" r="8" fill="#ff1100"></circle>
+                </g>
+            </svg>
+            <h2 id="est-time" style="padding-right: 30px;">my time</h2>
+            <a href="https://discordapp.com/users/646450857801547799" target="_blank"
+                style="padding-right: 30px; text-decoration: none; color: white;">
+                <h2>Contact</h2>
+            </a>
+            <a href="/" target="" style="text-decoration: none; color: white;">
+                <h2 style="padding-right: 30px;">Home</h2>
+            </a>
+        </div>
+
+        <div id="snowContainer"></div>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const container = document.getElementById('snowContainer');
+                if (!container) {
+                    console.error('Element with ID "snowContainer" not found.');
+                    return;
+                }
+
+                for (let i = 0; i < 200; i++) {
+                    const div = document.createElement('div');
+                    div.className = 'snow';
+                    container.appendChild(div);
+                }
+            });
+        </script>
+
+        <div
+            style="display: flex; flex-direction: row; align-items: flex-start; text-align: center; justify-content: center; padding: 50px; max-width: 2000px;">
+            <div id="output" style="padding-right: 30px;"></div>
+
+            <div id="ranks" style="padding-right: 30px; display: flex; flex-direction: column; gap: 12px;">
+                <div id="siege" class="game-card">
+                    <img style="height: 60px;" id="siegeImage" src="static/images/rankIcons/siege/bronze-1.png">
+                    <h1 style="font-size: 16px;">Rainbow Six Siege</h1>
+                    <h2 style="font-size: 16px;" id="seigePoints">RP</h2>
+                    <a href="https://r6.tracker.network/r6siege/profile/ubi/itscosmatic/overview" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"
+                            fill="#FFFFFF">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <title>ionicons-v5-k</title>
+                                <path
+                                    d="M384,224V408a40,40,0,0,1-40,40H104a40,40,0,0,1-40-40V168a40,40,0,0,1,40-40H271.48"
+                                    style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                </path>
+                                <polyline points="336 64 448 64 448 176"
+                                    style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                </polyline>
+                                <line x1="224" y1="288" x2="440" y2="72"
+                                    style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                </line>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+                <div id="val" class="game-card">
+                    <img style="height: 60px;" id="valImage" src="static/images/rankIcons/valorant/1.png">
+                    <h1 style="font-size: 16px;">Valorant</h1>
+                    <h2 style="font-size: 16px;" id="valSeason">Season x</h2>
+                    <a href="https://tracker.gg/valorant/profile/riot/cosmatic%23cael/overview" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"
+                            fill="#FFFFFF">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <title>ionicons-v5-k</title>
+                                <path
+                                    d="M384,224V408a40,40,0,0,1-40,40H104a40,40,0,0,1-40-40V168a40,40,0,0,1,40-40H271.48"
+                                    style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                </path>
+                                <polyline points="336 64 448 64 448 176"
+                                    style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                </polyline>
+                                <line x1="224" y1="288" x2="440" y2="72"
+                                    style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                </line>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+                <div id="brawl_stars" class="game-card">
+                    <img style="height: 60px;" id="brawl_starsImage" src="static/images/rankIcons/brawl_stars/1.webp">
+                    <h1 style="font-size: 16px;">Brawl Stars</h1>
+                    <h2 style="font-size: 16px;" id="brawl_trophies">Trophies</h2>
+                    <a href="https://brawlace.com/players/%232PUGGL09J" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"
+                            fill="#FFFFFF">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <title>ionicons-v5-k</title>
+                                <path
+                                    d="M384,224V408a40,40,0,0,1-40,40H104a40,40,0,0,1-40-40V168a40,40,0,0,1,40-40H271.48"
+                                    style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                </path>
+                                <polyline points="336 64 448 64 448 176"
+                                    style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                </polyline>
+                                <line x1="224" y1="288" x2="440" y2="72"
+                                    style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                </line>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+                <div id="fort" class="game-card">
+                    <img style="height: 60px;" id="fortImage" src="static/images/rankIcons/fortnite/18.png">
+                    <h1 style="font-size: 16px;">Fortnite</h1>
+                    <h2 style="font-size: 16px;" id="fortSeason">ZB Reload</h2>
+                    <a href="https://fortnitetracker.com/profile/all/UpByTheStars" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"
+                            fill="#FFFFFF">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <title>ionicons-v5-k</title>
+                                <path
+                                    d="M384,224V408a40,40,0,0,1-40,40H104a40,40,0,0,1-40-40V168a40,40,0,0,1,40-40H271.48"
+                                    style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                </path>
+                                <polyline points="336 64 448 64 448 176"
+                                    style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                </polyline>
+                                <line x1="224" y1="288" x2="440" y2="72"
+                                    style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                </line>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+                <div id="rl" class="game-card">
+                    <img style="height: 60px;" id="RLImage" src="static/images/rankIcons/rocket_league/1.png">
+                    <h1 style="font-size: 16px;">Rocket League</h1>
+                    <h2 style="font-size: 16px;" id="RLRank">rank</h2>
+                    <a href="https://rocketleague.tracker.network/rocket-league/profile/xbl/UpByTheStars/overview"
+                        target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"
+                            fill="#FFFFFF">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <title>ionicons-v5-k</title>
+                                <path
+                                    d="M384,224V408a40,40,0,0,1-40,40H104a40,40,0,0,1-40-40V168a40,40,0,0,1,40-40H271.48"
+                                    style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                </path>
+                                <polyline points="336 64 448 64 448 176"
+                                    style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                </polyline>
+                                <line x1="224" y1="288" x2="440" y2="72"
+                                    style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                </line>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div id="random-stats" style="padding-right: 30px; display: flex; flex-direction: column; gap: 12px;">
+                <div class="game-card">
+                    <h1 style="font-size: 16px;">Platforms tracked: </h1>
+                    <div class="platform-icons">
+                        <svg width="24" height="24" fill="#FFFFFF" viewBox="0 0 32 32" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" stroke="#FFFFFF">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <title>xbox</title>
+                                <path
+                                    d="M16 5.425c-1.888-1.125-4.106-1.922-6.473-2.249l-0.092-0.010c-0.070-0.005-0.152-0.008-0.234-0.008-0.613 0-1.188 0.16-1.687 0.441l0.017-0.009c2.357-1.634 5.277-2.61 8.426-2.61 0.008 0 0.016 0 0.024 0h0.019c0.005 0 0.011 0 0.018 0 3.157 0 6.086 0.976 8.501 2.642l-0.050-0.033c-0.478-0.272-1.051-0.433-1.662-0.433-0.085 0-0.169 0.003-0.252 0.009l0.011-0.001c-2.459 0.336-4.677 1.13-6.648 2.297l0.082-0.045zM5.554 5.268c-0.041 0.014-0.077 0.032-0.11 0.054l0.002-0.001c-2.758 2.723-4.466 6.504-4.466 10.684 0 3.584 1.256 6.875 3.353 9.457l-0.022-0.028c-1.754-3.261 4.48-12.455 7.61-16.159-3.53-3.521-5.277-4.062-6.015-4.062-0.010-0-0.021-0.001-0.032-0.001-0.115 0-0.225 0.021-0.326 0.060l0.006-0.002zM20.083 9.275c3.129 3.706 9.367 12.908 7.605 16.161 2.075-2.554 3.332-5.845 3.332-9.43 0-4.181-1.709-7.962-4.467-10.684l-0.002-0.002c-0.029-0.021-0.063-0.039-0.1-0.052l-0.003-0.001c-0.1-0.036-0.216-0.056-0.336-0.056-0.005 0-0.011 0-0.016 0h0.001c-0.741-0-2.485 0.543-6.014 4.063zM6.114 27.306c2.627 2.306 6.093 3.714 9.888 3.714s7.261-1.407 9.905-3.728l-0.017 0.015c2.349-2.393-5.402-10.901-9.89-14.29-4.483 3.39-12.24 11.897-9.886 14.29z">
+                                </path>
+                            </g>
+                        </svg>
+                        <svg width="24" height="24" fill="#FFFFFF" viewBox="0 0 32 32" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <title>steam</title>
+                                <path
+                                    d="M18.102 12.129c0-0 0-0 0-0.001 0-1.564 1.268-2.831 2.831-2.831s2.831 1.268 2.831 2.831c0 1.564-1.267 2.831-2.831 2.831-0 0-0 0-0.001 0h0c-0 0-0 0-0.001 0-1.563 0-2.83-1.267-2.83-2.83 0-0 0-0 0-0.001v0zM24.691 12.135c0-2.081-1.687-3.768-3.768-3.768s-3.768 1.687-3.768 3.768c0 2.081 1.687 3.768 3.768 3.768v0c2.080-0.003 3.765-1.688 3.768-3.767v-0zM10.427 23.76l-1.841-0.762c0.524 1.078 1.611 1.808 2.868 1.808 1.317 0 2.448-0.801 2.93-1.943l0.008-0.021c0.155-0.362 0.246-0.784 0.246-1.226 0-1.757-1.424-3.181-3.181-3.181-0.405 0-0.792 0.076-1.148 0.213l0.022-0.007 1.903 0.787c0.852 0.364 1.439 1.196 1.439 2.164 0 1.296-1.051 2.347-2.347 2.347-0.324 0-0.632-0.066-0.913-0.184l0.015 0.006zM15.974 1.004c-7.857 0.001-14.301 6.046-14.938 13.738l-0.004 0.054 8.038 3.322c0.668-0.462 1.495-0.737 2.387-0.737 0.001 0 0.002 0 0.002 0h-0c0.079 0 0.156 0.005 0.235 0.008l3.575-5.176v-0.074c0.003-3.12 2.533-5.648 5.653-5.648 3.122 0 5.653 2.531 5.653 5.653s-2.531 5.653-5.653 5.653h-0.131l-5.094 3.638c0 0.065 0.005 0.131 0.005 0.199 0 0.001 0 0.002 0 0.003 0 2.342-1.899 4.241-4.241 4.241-2.047 0-3.756-1.451-4.153-3.38l-0.005-0.027-5.755-2.383c1.841 6.345 7.601 10.905 14.425 10.905 8.281 0 14.994-6.713 14.994-14.994s-6.713-14.994-14.994-14.994c-0 0-0.001 0-0.001 0h0z">
+                                </path>
+                            </g>
+                        </svg>
+                        <svg width="24" height="24" viewBox="0 0 192.00 192.00" xmlns="http://www.w3.org/2000/svg"
+                            fill="none">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path stroke="#FFFFFF" stroke-linejoin="round" stroke-width="12"
+                                    d="M29.88 57.549 133.845 29.69l27.857 103.967-103.966 27.857z"></path>
+                                <path stroke="#FFFFFF" stroke-linejoin="round" stroke-width="12"
+                                    d="m80 87 25.114-6.73 6.73 25.115-25.115 6.73z"></path>
+                            </g>
+                        </svg>
+                        <svg width="24" height="24" fill="#FFFFFF" viewBox="0 0 32 32"
+                            xmlns="http://www.w3.org/2000/svg" stroke="#FFFFFF">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M31.416 15.984c-0.348-16.391-22.145-22.505-30.541-7.14 0.376 0.276 0.88 0.635 1.256 0.896-0.62 1.296-1.057 2.676-1.303 4.093-0.161 0.912-0.244 1.833-0.244 2.76 0 8.5 6.911 15.407 15.421 15.407 8.516 0 15.411-6.896 15.411-15.407zM4.385 18.729c-0.203 1.667-0.073 2.183-0.073 2.385l-0.375 0.131c-0.14-0.272-0.489-1.24-0.651-2.543-0.407-4.957 2.979-9.421 8.14-10.265 4.724-0.692 9.251 2.245 10.303 6.349l-0.375 0.131c-0.115-0.115-0.303-0.448-1.027-1.172-5.708-5.709-14.672-3.095-15.943 4.989zM19.057 21.505c-0.787 1.135-2.079 1.812-3.453 1.807-2.328 0.005-4.213-1.88-4.208-4.208 0.005-2.197 1.708-4.025 3.901-4.187 1.359-0.057 2.629 0.676 3.224 1.864 0.651 1.301 0.411 2.88-0.604 3.927 0.389 0.276 0.765 0.537 1.14 0.797zM27.828 21.667c-2.224 5.041-6.807 7.688-11.692 7.615-9.381-0.464-12.109-11.287-5.839-15.188l0.276 0.271c-0.104 0.147-0.48 0.439-1.057 1.579-0.677 1.385-0.896 2.776-0.808 3.641 0.489 7.561 11.089 9.109 14.729 1.619 4.641-10.244-7.677-20.667-18.604-12.703l-0.245-0.245c2.876-4.509 8.5-6.52 13.86-5.176 8.197 2.067 12.604 10.609 9.38 18.588z">
+                                </path>
+                            </g>
+                        </svg>
+                        <svg width="24" height="24" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <title>spotify [#ffffff]</title>
+                                <desc>Created with Sketch.</desc>
+                                <defs> </defs>
+                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7479.000000)"
+                                        fill="#ffffff">
+                                        <g id="icons" transform="translate(56.000000, 160.000000)">
+                                            <path
+                                                d="M99.915,7327.865 C96.692,7325.951 91.375,7325.775 88.297,7326.709 C87.803,7326.858 87.281,7326.58 87.131,7326.085 C86.981,7325.591 87.26,7325.069 87.754,7324.919 C91.287,7323.846 97.159,7324.053 100.87,7326.256 C101.314,7326.52 101.46,7327.094 101.196,7327.538 C100.934,7327.982 100.358,7328.129 99.915,7327.865 L99.915,7327.865 Z M99.81,7330.7 C99.584,7331.067 99.104,7331.182 98.737,7330.957 C96.05,7329.305 91.952,7328.827 88.773,7329.792 C88.36,7329.916 87.925,7329.684 87.8,7329.272 C87.676,7328.86 87.908,7328.425 88.32,7328.3 C91.951,7327.198 96.466,7327.732 99.553,7329.629 C99.92,7329.854 100.035,7330.334 99.81,7330.7 L99.81,7330.7 Z M98.586,7333.423 C98.406,7333.717 98.023,7333.81 97.729,7333.63 C95.381,7332.195 92.425,7331.871 88.944,7332.666 C88.609,7332.743 88.274,7332.533 88.198,7332.197 C88.121,7331.862 88.33,7331.528 88.667,7331.451 C92.476,7330.58 95.743,7330.955 98.379,7332.566 C98.673,7332.746 98.766,7333.129 98.586,7333.423 L98.586,7333.423 Z M94,7319 C88.477,7319 84,7323.477 84,7329 C84,7334.523 88.477,7339 94,7339 C99.523,7339 104,7334.523 104,7329 C104,7323.478 99.523,7319.001 94,7319.001 L94,7319 Z"
+                                                id="spotify-[#ffffff]"> </path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+                <div id="robloxPlaytime" class="game-card">
+                    <h1 style="font-size: 16px;" id="robloxText">Roblox playtime (since May, 2025): Loading...</h1>
+                </div>
+                <div id="gamescore">
+                    <div class="game-card">
+                        <div class="platform-icons">
+                            <svg width="24" height="24" fill="#FFFFFF" viewBox="0 0 32 32" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" stroke="#FFFFFF">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <title>xbox</title>
+                                    <path
+                                        d="M16 5.425c-1.888-1.125-4.106-1.922-6.473-2.249l-0.092-0.010c-0.070-0.005-0.152-0.008-0.234-0.008-0.613 0-1.188 0.16-1.687 0.441l0.017-0.009c2.357-1.634 5.277-2.61 8.426-2.61 0.008 0 0.016 0 0.024 0h0.019c0.005 0 0.011 0 0.018 0 3.157 0 6.086 0.976 8.501 2.642l-0.050-0.033c-0.478-0.272-1.051-0.433-1.662-0.433-0.085 0-0.169 0.003-0.252 0.009l0.011-0.001c-2.459 0.336-4.677 1.13-6.648 2.297l0.082-0.045zM5.554 5.268c-0.041 0.014-0.077 0.032-0.11 0.054l0.002-0.001c-2.758 2.723-4.466 6.504-4.466 10.684 0 3.584 1.256 6.875 3.353 9.457l-0.022-0.028c-1.754-3.261 4.48-12.455 7.61-16.159-3.53-3.521-5.277-4.062-6.015-4.062-0.010-0-0.021-0.001-0.032-0.001-0.115 0-0.225 0.021-0.326 0.060l0.006-0.002zM20.083 9.275c3.129 3.706 9.367 12.908 7.605 16.161 2.075-2.554 3.332-5.845 3.332-9.43 0-4.181-1.709-7.962-4.467-10.684l-0.002-0.002c-0.029-0.021-0.063-0.039-0.1-0.052l-0.003-0.001c-0.1-0.036-0.216-0.056-0.336-0.056-0.005 0-0.011 0-0.016 0h0.001c-0.741-0-2.485 0.543-6.014 4.063zM6.114 27.306c2.627 2.306 6.093 3.714 9.888 3.714s7.261-1.407 9.905-3.728l-0.017 0.015c2.349-2.393-5.402-10.901-9.89-14.29-4.483 3.39-12.24 11.897-9.886 14.29z">
+                                    </path>
+                                </g>
+                            </svg>
+                        </div>
+                        <h1 style="font-size: 16px;" id="gamescoreText">Current Xbox gamescore: Loading...</h1>
+                    </div>
+                </div>
+                <div id="monkeytype">
+                    <div class="game-card">
+                        <a href="#" id="profileLink" target="_blank">
+                            <img width="32" height="32"
+                                src="https://raw.githubusercontent.com/monkeytype-hub/monkeytype-icon/master/monkeytype-icon/svg/tron_orange.svg">
+                        </a>
+                        <div style="display: flex; flex-direction: column; text-align: left; margin: 0px;">
+                            <p style="font-size: 16px;" id="topWpm">Loading...</p>
+                            <p style="font-size: 16px;" id="typingTime">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="spotify">
+                    <div class="game-card">
+                        <div class="platform-icons">
+                            <svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <title>spotify [#ffffff]</title>
+                                    <desc>Created with Sketch.</desc>
+                                    <defs> </defs>
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7479.000000)"
+                                            fill="#ffffff">
+                                            <g id="icons" transform="translate(56.000000, 160.000000)">
+                                                <path
+                                                    d="M99.915,7327.865 C96.692,7325.951 91.375,7325.775 88.297,7326.709 C87.803,7326.858 87.281,7326.58 87.131,7326.085 C86.981,7325.591 87.26,7325.069 87.754,7324.919 C91.287,7323.846 97.159,7324.053 100.87,7326.256 C101.314,7326.52 101.46,7327.094 101.196,7327.538 C100.934,7327.982 100.358,7328.129 99.915,7327.865 L99.915,7327.865 Z M99.81,7330.7 C99.584,7331.067 99.104,7331.182 98.737,7330.957 C96.05,7329.305 91.952,7328.827 88.773,7329.792 C88.36,7329.916 87.925,7329.684 87.8,7329.272 C87.676,7328.86 87.908,7328.425 88.32,7328.3 C91.951,7327.198 96.466,7327.732 99.553,7329.629 C99.92,7329.854 100.035,7330.334 99.81,7330.7 L99.81,7330.7 Z M98.586,7333.423 C98.406,7333.717 98.023,7333.81 97.729,7333.63 C95.381,7332.195 92.425,7331.871 88.944,7332.666 C88.609,7332.743 88.274,7332.533 88.198,7332.197 C88.121,7331.862 88.33,7331.528 88.667,7331.451 C92.476,7330.58 95.743,7330.955 98.379,7332.566 C98.673,7332.746 98.766,7333.129 98.586,7333.423 L98.586,7333.423 Z M94,7319 C88.477,7319 84,7323.477 84,7329 C84,7334.523 88.477,7339 94,7339 C99.523,7339 104,7334.523 104,7329 C104,7323.478 99.523,7319.001 94,7319.001 L94,7319 Z"
+                                                    id="spotify-[#ffffff]"> </path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <h1 style="font-size: 16px;" id="statsFMDays">{time} spent streaming spotify</h1>
+                    </div>
+                </div>
+                <div id="github">
+                    <div class="game-card">
+                        <h1 style="font-size: 16px;">Github Stats:</h1>
+                        <img
+                            src="https://github-readme-stats.vercel.app/api/top-langs/?username=cosmaticdev&layout=compact&theme=radical">
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <script type="module" src="/static/js/games.js"></script>
+    </main>
+</body>
+
+</html>

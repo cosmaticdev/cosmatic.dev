@@ -1,0 +1,170 @@
+body {
+    font-family: 'Libre Franklin', sans-serif;
+    overflow-x: hidden;
+    background-color: grey;
+    color: white;
+    background: linear-gradient(to bottom, #530296 30%, #b408d6 100%);
+    display: flex;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.center {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.header,
+h1,
+h2,
+h3 {
+    margin: 0;
+    padding: 0px;
+    text-align: center;
+}
+
+.circle-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.redbutton,
+.greenbutton {
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.redbutton {
+    background-color: #e63946;
+    box-shadow: 0 0 10px rgba(230, 10, 10, 0.3);
+}
+
+.greenbutton {
+    background-color: #2a9d8f;
+    box-shadow: 0 0 10px rgba(42, 157, 143, 0.3);
+}
+
+button {
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 1px solid white;
+}
+
+a {
+    color: #90e0ef;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#output {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.game-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 20px;
+    border-radius: 14px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    color: #fff;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+}
+
+.game-image {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.game-info {
+    flex: 1;
+    text-align: left;
+}
+
+.game-name {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.game-meta {
+    font-size: 14px;
+    color: #ddd;
+    margin-bottom: 2px;
+}
+
+.platform-icons {
+    margin-top: 4px;
+}
+
+.platform-icons svg {
+    width: 32px;
+    height: 32px;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+.github-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #24292e;
+    /* GitHub dark background */
+    color: #ffffff;
+    padding: 10px 16px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+    z-index: 1000;
+}
+
+.github-button:hover {
+    background-color: #2f363d;
+}
+
+.github-icon {
+    margin-right: 8px;
+}
+
+.github-icon svg {
+    fill: white;
+    height: 16px;
+    width: 16px;
+}

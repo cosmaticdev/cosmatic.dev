@@ -1,0 +1,376 @@
+body {
+    font-family: 'Libre Franklin', sans-serif;
+    background: linear-gradient(to bottom, #530296 30%, #b408d6 100%);
+    overflow: show;
+    overflow-x: hidden;
+    color: white;
+    scroll-behavior: smooth;
+}
+
+.center {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-left: 75px;
+    padding-right: 75px;
+}
+
+.header {
+    margin: 0;
+    padding: 0px;
+}
+
+h1 {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0px;
+}
+
+h2 {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0px;
+}
+
+h3 {
+    margin: 0;
+    padding: 0px;
+}
+
+.circle-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.popup-content {
+    background: #2c2c2a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    max-width: 80%;
+}
+
+.redbutton {
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(230, 10, 10, 0.2);
+    background-color: darkred;
+}
+
+.greenbutton {
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(3, 211, 65, 0.2);
+    background-color: darkgreen;
+}
+
+button {
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+a {
+    color: darkblue;
+}
+
+@media only screen and (max-width: 768px) {
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    /* 32px */
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    /* 28px */
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    /* 24px */
+    p,
+    a,
+    button {
+        font-size: 0.9rem;
+    }
+
+    /* 14.4px */
+}
+
+.record-wrapper {
+    position: relative;
+    width: 530px;
+    height: 530px;
+}
+
+.record-container {
+    position: absolute;
+    top: -15px;
+    left: 50px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, #222 40%, #000 25%);
+    border: 5px solid #333;
+    animation: spin 4s linear infinite;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.grooves {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-image: repeating-radial-gradient(circle, transparent, transparent 2px, #222 5px, #222 5px);
+}
+
+.label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 275px;
+    height: 275px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    z-index: 2;
+}
+
+.label img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.record-text {
+    position: absolute;
+    top: 100%;
+    /* Pushes it right below the wrapper */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 20px;
+    width: max-content;
+}
+
+.bloom {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 650px;
+    /* Same as record size or larger */
+    height: 650px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle,
+            rgba(255, 0, 150, 0.6) 0%,
+            /* Center bloom color (customizable) */
+            rgba(255, 0, 150, 0.3) 40%,
+            /* Fades out */
+            rgba(0, 0, 0, 0) 100%
+            /* Fully transparent to blend with background */
+        );
+    filter: blur(40px);
+    /* Creates soft glow */
+    pointer-events: none;
+    /* Prevent interaction */
+    z-index: 0;
+    /* Behind the record */
+}
+
+#corner-widget {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    background: rgba(0, 0, 0, 0);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    z-index: 1000;
+    visibility: hidden;
+    text-align: center;
+    font-size: 25px;
+}
+
+.top-section {
+    height: 100vh;
+    z-index: 3;
+}
+
+.main-content {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s linear, transform 0.5s linear;
+    min-height: 100vh;
+}
+
+.top-section.out {
+    pointer-events: none;
+}
+
+.main-content.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.github-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #24292e;
+    /* GitHub dark background */
+    color: #ffffff;
+    padding: 10px 16px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+    z-index: 1000;
+}
+
+.github-button:hover {
+    background-color: #2f363d;
+}
+
+.github-icon {
+    margin-right: 8px;
+}
+
+.github-icon svg {
+    fill: white;
+    height: 16px;
+    width: 16px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+.preview {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--card-bg);
+    padding: 1rem;
+    margin-top: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.preview:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+}
+
+.repo-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+
+.description {
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+
+.language-bar {
+    display: flex;
+    height: 10px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.language-legend {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+    margin-top: 0.25rem;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 0.4rem;
+    flex-shrink: 0;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--button-hover);
+}
