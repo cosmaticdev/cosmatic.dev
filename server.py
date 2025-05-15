@@ -15,7 +15,9 @@ except:
     import os
 
     input("Missing packages! Click enter to install them?")
-    os.system("pip install fastapi uvicorn discord.py requests dotenv")
+    os.system(
+        "pip install fastapi uvicorn discord.py requests dotenv 'uvicorn[standard]'"
+    )
 
     import api
 
