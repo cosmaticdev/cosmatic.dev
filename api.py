@@ -78,7 +78,7 @@ async def statsFM(username, userid):
                     headers=headers,
                 ).json(),
                 "albums": requests.get(
-                    f"https://api.stats.fm/api/v1/users/{username}/top/albums?range=weeks&limit=10",
+                    f"https://api.stats.fm/api/v1/users/{username}/top/albums?range=weeks&limit=11",
                     headers=headers,
                 ).json(),
             }
@@ -103,7 +103,7 @@ async def statsFM(username, userid):
                     headers=headers,
                 ).json(),
                 "albums": requests.get(
-                    f"https://api.stats.fm/api/v1/users/{userid}/top/albums?after={start_of_saturday_timestamp}000&before={int(start_of_saturday_timestamp + 60 * 60 * 24 * 7 - 1)}999&limit=10",
+                    f"https://api.stats.fm/api/v1/users/{userid}/top/albums?after={start_of_saturday_timestamp}000&before={int(start_of_saturday_timestamp + 60 * 60 * 24 * 7 - 1)}999&limit=11",
                     headers=headers,
                 ).json(),
             }

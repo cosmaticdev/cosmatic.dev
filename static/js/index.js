@@ -1,66 +1,96 @@
-let currentState = 'intro';
-let lastScrollY = window.scrollY;
+function isMobileDevice() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
 
-window.addEventListener('wheel', (event) => {
-    const topSection = document.getElementById('topSection');
-    const mainContent = document.getElementById('mainContent');
-    const cornerWidget = document.getElementById('corner-widget');
+if (isMobileDevice()) {
+    console.log(`Mobile device [${navigator.userAgent}] detected, removing items`);
+    document.getElementById("corner-widget").remove();
+    document.getElementById('scroll icon').remove();
+    document.getElementById('pcOnlyHeader').remove();
+    document.getElementById('mainContent').remove();
+    document.getElementById('topSection').style.height = 'auto';
+    document.getElementById('full-content').style.height = '100vh';
 
-    const scrollDirection = event.deltaY > 0 ? 'down' : 'up';
-    const nearTop = window.scrollY <= mainContent.getBoundingClientRect().top + window.scrollY + 10;
-
-    if (scrollDirection === 'down' && currentState === 'intro') {
-        topSection.classList.add('out');
-        mainContent.classList.add('show');
-        currentState = 'main';
-
-        const preventScroll = (event) => {
-            event.preventDefault();
-        };
-        window.addEventListener('wheel', preventScroll, { passive: false });
-
-        // Snap to top of main content
-        setTimeout(() => {
-            window.scrollTo({
-                top: mainContent.offsetTop - 10,
-                behavior: 'smooth'
-            });
-        }, 100);
-        window.removeEventListener('wheel', preventScroll);
-    }
-
-    if (scrollDirection === 'up' && currentState === 'main' && nearTop) {
-        topSection.classList.remove('out');
-        mainContent.classList.remove('show');
-        currentState = 'intro';
-
-        const preventScroll = (event) => {
-            event.preventDefault();
-        };
-        window.addEventListener('wheel', preventScroll, { passive: false });
-
-        setTimeout(() => {
-            window.scrollTo({
-                top: window.top,
-                behavior: 'smooth'
-            });
-        }, 100);
-
-        window.removeEventListener('wheel', preventScroll);
-    }
-
-    lastScrollY = window.scrollY;
-});
-
-window.addEventListener('load', () => {
-    window.scrollTo(0, 0);
-});
-
-window.addEventListener('beforeunload', () => {
-    window.scrollTo(0, 0);
-});
+    document.getElementById('limitedWarning').style.visibility = "visible";
+}
 
 let connectionScore = 2;
+
+if (!isMobileDevice()) {
+    let currentState = 'intro';
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('wheel', (event) => {
+        const topSection = document.getElementById('topSection');
+        const mainContent = document.getElementById('mainContent');
+        const cornerWidget = document.getElementById('corner-widget');
+
+        const scrollDirection = event.deltaY > 0 ? 'down' : 'up';
+        const nearTop = window.scrollY <= mainContent.getBoundingClientRect().top + window.scrollY + 10;
+
+        if (scrollDirection === 'down' && currentState === 'intro') {
+            topSection.classList.add('out');
+            mainContent.classList.add('show');
+            currentState = 'main';
+
+            const preventScroll = (event) => {
+                event.preventDefault();
+            };
+            window.addEventListener('wheel', preventScroll, { passive: false });
+
+            // Snap to top of main content
+            setTimeout(() => {
+                window.scrollTo({
+                    top: mainContent.offsetTop - 10,
+                    behavior: 'smooth'
+                });
+            }, 100);
+            window.removeEventListener('wheel', preventScroll);
+        }
+
+        if (scrollDirection === 'up' && currentState === 'main' && nearTop) {
+            topSection.classList.remove('out');
+            mainContent.classList.remove('show');
+            currentState = 'intro';
+
+            const preventScroll = (event) => {
+                event.preventDefault();
+            };
+            window.addEventListener('wheel', preventScroll, { passive: false });
+
+            setTimeout(() => {
+                window.scrollTo({
+                    top: window.top,
+                    behavior: 'smooth'
+                });
+            }, 100);
+
+            window.removeEventListener('wheel', preventScroll);
+        }
+
+        lastScrollY = window.scrollY;
+    });
+
+    window.addEventListener('load', () => {
+        window.scrollTo(0, 0);
+    });
+
+    window.addEventListener('beforeunload', () => {
+        window.scrollTo(0, 0);
+    });
+
+    function updateServerConnection() {
+        if (connectionScore == 2) {
+            document.getElementById("serverConnection").querySelector("circle").setAttribute("fill", "#00ff11");
+        } else if (connectionScore == 1) {
+            document.getElementById("serverConnection").querySelector("circle").setAttribute("fill", "#fff700");
+        } else {
+            document.getElementById("serverConnection").querySelector("circle").setAttribute("fill", "#ff1100");
+        }
+    }
+    updateServerConnection();
+    setInterval(updateServerConnection, 1000 * 30);
+}
 
 const data = await loadJson();
 
@@ -68,7 +98,7 @@ function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-if (data.Spotify["@attr"] != null) {
+if (data.Spotify["@attr"] != null && !isMobileDevice()) {
     if (data.Spotify["@attr"].nowplaying == "true") {
         const recordImage = document.getElementById("recordImage");
         recordImage.src = data.Spotify.image[2]["#text"];
@@ -212,18 +242,6 @@ function updateESTTime() {
 
 updateESTTime();
 setInterval(updateESTTime, 1000);
-
-function updateServerConnection() {
-    if (connectionScore == 2) {
-        document.getElementById("serverConnection").querySelector("circle").setAttribute("fill", "#00ff11");
-    } else if (connectionScore == 1) {
-        document.getElementById("serverConnection").querySelector("circle").setAttribute("fill", "#fff700");
-    } else {
-        document.getElementById("serverConnection").querySelector("circle").setAttribute("fill", "#ff1100");
-    }
-}
-updateServerConnection();
-setInterval(updateServerConnection, 1000 * 30)
 
 async function loadJson() {
     try {
@@ -476,7 +494,7 @@ async function statsFMUpdate(period) {
         playedMsHeading.style.textAlign = "left";
 
         infoDiv.appendChild(nameHeading);
-        infoDiv.appendChild(authorHeading);
+        //infoDiv.appendChild(authorHeading);
         infoDiv.appendChild(playedMsHeading);
         rowDiv.appendChild(posText);
         rowDiv.appendChild(img);
@@ -526,7 +544,7 @@ async function statsFMUpdate(period) {
         playedMsHeading.style.textAlign = "left";
 
         infoDiv.appendChild(nameHeading);
-        infoDiv.appendChild(authorHeading);
+        //infoDiv.appendChild(authorHeading);
         infoDiv.appendChild(playedMsHeading);
         rowDiv.appendChild(img);
         rowDiv.appendChild(infoDiv);
@@ -546,34 +564,8 @@ if (monkeyType) {
     monkeyType.textContent = Math.round(data["monkeyType"]["typingStats"]["timeTyping"] / 60) + ' minutes doing typing tests';
 }
 
-// formula for green-red color change: y=-0.0001235x^{3}+0.05188x^{2}-1.354x-0.2005
-let green = 255;
-let val = data["RAMInfo"]["RAM Usage"];
-if (val > 50) {
-    green = 200 - (val - 50);
-}
-let red = -0.0001235 * (val * val * val) + 0.05188 * (val * val) - 1.354 * val - 0.2005;
-if (red < 0) { red = 0; } document.getElementById("ramIcon").querySelectorAll(".cls-1").forEach(element => {
-    element.setAttribute("stroke", `rgb(${red}, ${green}, ${0})`);
-    element.setAttribute("fill", null);
-});
 
 document.getElementById('ramText').textContent = (data["RAMInfo"]["Used RAM"] / 1024).toFixed(2) + " / " + (data["RAMInfo"]["Total RAM"] / 1024).toFixed(2) + `GB (${data["RAMInfo"]["RAM Usage"]}%)`
-
-
-green = 255;
-val = data["CPUInfo"]["CPU Usage"];
-if (val > 50) {
-    green = 200 - (val - 50);
-}
-red = -0.0001235 * (val * val * val) + 0.05188 * (val * val) - 1.354 * val - 0.2005;
-if (red < 0) { red = 0; } const cpuIcon = document.getElementById("CPU"); if (cpuIcon) {
-    cpuIcon.querySelectorAll("path").forEach(element => {
-        element.setAttribute("fill", `rgb(${red}, ${green}, ${0})`);
-        element.setAttribute("stroke", `rgb(${red}, ${green}, ${0})`);
-    });
-}
-
 document.getElementById('CPUText').textContent = `${data["CPUInfo"]["CPU Cores"]}-core @${data["CPUInfo"]["CPU Frequency"]} (${data["CPUInfo"]["CPU Usage"]}%)`
 
 
@@ -585,46 +577,16 @@ data["storageDrives"].forEach(drive => {
     usedSpace += drive.used;
 });
 
-val = (usedSpace / totalSpace) * 100;
+let val = (usedSpace / totalSpace) * 100;
 val = Math.round(val * 100) / 100;
-
-green = 255;
-if (val > 50) {
-    green = 200 - (val - 50);
-}
-red = -0.0001235 * (val * val * val) + 0.05188 * (val * val) - 1.354 * val - 0.2005;
-if (red < 0) { red = 0; } const storageIcon = document.getElementById("storage"); if (storageIcon) {
-    storageIcon.querySelectorAll("path").forEach(element => {
-        element.setAttribute("fill", `rgb(${red}, ${green}, ${0})`);
-        element.setAttribute("stroke", `rgb(${red}, ${green}, ${0})`);
-    });
-}
 
 document.getElementById('storageText').textContent = `${usedSpace.toFixed(2)}GB /
                     ${totalSpace.toFixed(2)}GB (${val}%)`
 
 try {
-    if ((data["wifiSpeed"]["down"] < 200) || (data["wifiSpeed"]["up"]
-        < 100)) { red = 255; green = 97; } else if ((data["wifiSpeed"]["down"] < 100) ||
-            (data["wifiSpeed"]["up"] < 50)) { red = 255; green = 0; } else {
-        red = 79; green = 255;
-    } const wifiIcon = document.getElementById("wifi"); if (wifiIcon) {
-        wifiIcon.querySelectorAll("path").forEach(element => {
-            element.setAttribute("fill", `rgb(${red}, ${green}, ${0})`);
-            element.setAttribute("stroke", `rgb(${red}, ${green}, ${0})`);
-        });
-
-        document.getElementById('wifiText').textContent = `${(data["wifiSpeed"]["down"]).toFixed(2)}Mbps down / ${(data["wifiSpeed"]["up"]).toFixed(2)}Mbps up`
-    }
+    document.getElementById('wifiText').textContent = `${(data["wifiSpeed"]["down"]).toFixed(2)}Mbps down / ${(data["wifiSpeed"]["up"]).toFixed(2)}Mbps up`
 }
 catch (error) {
-    const wifiIcon = document.getElementById("wifi"); if (wifiIcon) {
-        wifiIcon.querySelectorAll("path").forEach(element => {
-            element.setAttribute("fill", `rgb(255, 0, 0)`);
-            element.setAttribute("stroke", `rgb(255, 0, 0)`);
-        });
-    }
-
     document.getElementById('wifiText').innerHTML = `Couldn't fetch wifi speed...<br>geez I hope it's working`;
 }
 

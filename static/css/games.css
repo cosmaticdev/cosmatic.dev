@@ -168,3 +168,61 @@ a:hover {
     height: 16px;
     width: 16px;
 }
+
+
+@media (max-width: 768px) {
+    .circle-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .game-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px;
+    }
+
+    .game-image {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .game-info {
+        text-align: center;
+        width: 100%;
+    }
+
+    .game-name {
+        font-size: 16px;
+    }
+
+    .game-meta {
+        font-size: 13px;
+    }
+
+    .redbutton,
+    .greenbutton,
+    button {
+        width: 100%;
+        font-size: 15px;
+    }
+
+    .github-button {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        width: auto;
+        justify-content: center;
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+
+    .platform-icons {
+        justify-content: center;
+    }
+
+    .platform-icons svg {
+        margin: 4px;
+    }
+}
