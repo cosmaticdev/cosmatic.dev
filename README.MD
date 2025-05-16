@@ -158,7 +158,7 @@ sudo apt install -y \
 ```
 Awesome, stuff should be updated and installed. We can grab the code now
 ```
-git pull https://github.com/cosmaticdev/cosmatic.dev
+git clone https://github.com/cosmaticdev/cosmatic.dev
 ```
 And then make a python venv and opening it
 ```
