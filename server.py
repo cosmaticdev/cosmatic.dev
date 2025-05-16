@@ -11,6 +11,9 @@ try:
     import threading
     import requests
     from dotenv import load_dotenv
+    import subprocess
+    from datetime import datetime
+    import pytz
 except:
     import os
 
@@ -117,6 +120,37 @@ async def send_to_all_clients(message):
         await client.send_text(json.dumps(message))
 
 
+def gitInfo():
+    result_hash = subprocess.run(
+        ["git", "rev-parse", "--short", "HEAD"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    commit_hash = result_hash.stdout.strip()
+
+    result_ts = subprocess.run(
+        ["git", "log", "-1", "--format=%ct"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    timestamp = int(result_ts.stdout.strip())
+
+    utc_dt = datetime.utcfromtimestamp(timestamp).replace(tzinfo=pytz.utc)
+    est = pytz.timezone("US/Eastern")
+    est_dt = utc_dt.astimezone(est)
+
+    formatted_date = est_dt.strftime("%Y-%m-%d EST")
+
+    return {
+        "git_info": {
+            "header": f"{commit_hash} on {formatted_date}",
+            "url": f"https://github.com/cosmaticdev/cosmatic.dev/commit/{commit_hash}",
+        }
+    }
+
+
 TOKEN = os.getenv("DISCORD_TOKEN")
 USER_ID = int(os.getenv("DISCORD_ID"))
 
@@ -129,6 +163,8 @@ client = discord.Client(intents=intents)
 global data
 global params
 data = {}
+
+data.update(gitInfo())
 
 
 @client.event

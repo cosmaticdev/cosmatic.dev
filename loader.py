@@ -29,6 +29,9 @@ async def main():
     else:
         print(f"Failed to download file. Status code: {response.status_code}")
 
+    await run_command(
+        "/usr/bin/git stash push -u -- static/images"
+    )  # stash any images that might have been downloaded during runtime and could conflict with images bundled in repo
     await run_command("/usr/bin/git pull")
     await run_command("/usr/bin/sudo reboot")
 

@@ -363,6 +363,10 @@ function msToDHM(ms) {
     return result;
 }
 
+document.getElementById("git_version").textContent = "v" + data.git_info.header;
+document.getElementById("git_v_redirect").href = data.git_info.url;
+
+
 let statsFMLastClicked = "fourWeek"
 document.getElementById("fourWeek").style.borderColor = "green";
 
