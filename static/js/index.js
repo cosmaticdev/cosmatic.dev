@@ -290,7 +290,7 @@ if (socket) {
         console.log('Connected to WebSocket');
     };
 
-    socket.onmessage = (event) => {
+    socket.onmessage = async (event) => {
         try {
             const data = JSON.parse(event.data);
             let statusData = data; // Update the JSON variable
@@ -318,7 +318,7 @@ if (socket) {
                 if (data.Spotify["@attr"].nowplaying == "true") {
                     const recordImage = document.getElementById("recordImage");
                     recordImage.src = data.Spotify.image[2]["#text"];
-                    document.getElementById("currentlyListening").textContent = condenseString(`Currently listening to ${data.Spotify.name} by ${data.Spotify.artist["#text"]}`, 50);
+                    document.getElementById("currentlyListening").textContent = await condenseString(`Currently listening to ${data.Spotify.name} by ${data.Spotify.artist["#text"]}`, 50);
                     document.getElementById("corner-widget").style.visibility = "visible";
                 }
             }
