@@ -24,11 +24,13 @@ except:
 
 
 async def monkeyType(username):
-    res = json.loads(
-        requests.get(
-            f"https://api.monkeytype.com/users/{username}/profile?isUid=false"
-        ).text
+    res = requests.get(
+        f"https://api.monkeytype.com/users/{username}/profile?isUid=false"
     )
+    if not res.ok:
+        return {"monkeyType": None}
+    else:
+        res = res.json()
 
     return {
         "monkeyType": {
@@ -57,80 +59,115 @@ async def statsFM(username, userid):
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36",
     }
 
-    res["statsFM"].update(
-        {
-            "lifetime": requests.get(
-                f"https://api.stats.fm/api/v1/users/{userid}/streams/stats?range=lifetime",
-                headers=headers,
-            ).json()
-        }
+    # general profile data
+    req = requests.get(
+        f"https://api.stats.fm/api/v1/users/{userid}/streams/stats?range=lifetime",
+        headers=headers,
     )
+
+    if not req.ok:
+        return {"statsFM": None}
+    else:
+        res["statsFM"].update({"lifetime": req.json()})
+
+    # past 4 week data
+    tracks = requests.get(
+        f"https://api.stats.fm/api/v1/users/{username}/top/tracks?range=weeks&limit=10",
+        headers=headers,
+    )
+
+    artists = requests.get(
+        f"https://api.stats.fm/api/v1/users/{username}/top/artists?range=weeks&limit=10",
+        headers=headers,
+    )
+
+    albums = requests.get(
+        f"https://api.stats.fm/api/v1/users/{username}/top/albums?range=weeks&limit=11",
+        headers=headers,
+    )
+
+    if not tracks.ok or not artists.ok or not albums.ok:
+        return {"statsFM": None}
 
     res["statsFM"].update(
         {
             "4week": {
-                "tracks": requests.get(
-                    f"https://api.stats.fm/api/v1/users/{username}/top/tracks?range=weeks&limit=10",
-                    headers=headers,
-                ).json(),
-                "artists": requests.get(
-                    f"https://api.stats.fm/api/v1/users/{username}/top/artists?range=weeks&limit=10",
-                    headers=headers,
-                ).json(),
-                "albums": requests.get(
-                    f"https://api.stats.fm/api/v1/users/{username}/top/albums?range=weeks&limit=11",
-                    headers=headers,
-                ).json(),
+                "tracks": tracks.json(),
+                "artists": artists.json(),
+                "albums": albums.json(),
             }
         }
     )
 
+    # past week data
     current_date = datetime.date.today()
     days_to_saturday = (current_date.weekday() - 5) % 7
     start_of_week = current_date - datetime.timedelta(days=days_to_saturday)
     start_of_saturday = datetime.datetime.combine(start_of_week, datetime.time(0, 0, 0))
 
     start_of_saturday_timestamp = int(start_of_saturday.timestamp() + 60 * 60 * 24)
+
+    tracks = requests.get(
+        f"https://api.stats.fm/api/v1/users/{userid}/top/tracks?after={start_of_saturday_timestamp}000&before={int(start_of_saturday_timestamp + 60 * 60 * 24 * 7 - 1)}999&limit=10",
+        headers=headers,
+    )
+
+    artists = requests.get(
+        f"https://api.stats.fm/api/v1/users/{userid}/top/artists?after={start_of_saturday_timestamp}000&before={int(start_of_saturday_timestamp + 60 * 60 * 24 * 7 - 1)}999&limit=10",
+        headers=headers,
+    )
+
+    albums = requests.get(
+        f"https://api.stats.fm/api/v1/users/{userid}/top/albums?after={start_of_saturday_timestamp}000&before={int(start_of_saturday_timestamp + 60 * 60 * 24 * 7 - 1)}999&limit=11",
+        headers=headers,
+    )
+
+    if not tracks.ok or not artists.ok or not albums.ok:
+        return {"statsFM": None}
+
     res["statsFM"].update(
         {
             "thisweek": {
-                "tracks": requests.get(
-                    f"https://api.stats.fm/api/v1/users/{userid}/top/tracks?after={start_of_saturday_timestamp}000&before={int(start_of_saturday_timestamp + 60 * 60 * 24 * 7 - 1)}999&limit=10",
-                    headers=headers,
-                ).json(),
-                "artists": requests.get(
-                    f"https://api.stats.fm/api/v1/users/{userid}/top/artists?after={start_of_saturday_timestamp}000&before={int(start_of_saturday_timestamp + 60 * 60 * 24 * 7 - 1)}999&limit=10",
-                    headers=headers,
-                ).json(),
-                "albums": requests.get(
-                    f"https://api.stats.fm/api/v1/users/{userid}/top/albums?after={start_of_saturday_timestamp}000&before={int(start_of_saturday_timestamp + 60 * 60 * 24 * 7 - 1)}999&limit=11",
-                    headers=headers,
-                ).json(),
+                "tracks": tracks.json(),
+                "artists": artists.json(),
+                "albums": albums.json(),
             }
         }
     )
 
+    # past 6 months data
+    tracks = requests.get(
+        f"https://api.stats.fm/api/v1/users/{username}/top/tracks?range=months&limit=10",
+        headers=headers,
+    )
+
+    artists = requests.get(
+        f"https://api.stats.fm/api/v1/users/{username}/top/artists?range=months&limit=10",
+        headers=headers,
+    )
+
+    albums = requests.get(
+        f"https://api.stats.fm/api/v1/users/{username}/top/albums?range=months&limit=10",
+        headers=headers,
+    )
+
+    if not tracks.ok or not artists.ok or not albums.ok:
+        return {"statsFM": None}
+
     res["statsFM"].update(
         {
             "6months": {
-                "tracks": requests.get(
-                    f"https://api.stats.fm/api/v1/users/{username}/top/tracks?range=months&limit=10",
-                    headers=headers,
-                ).json(),
-                "artists": requests.get(
-                    f"https://api.stats.fm/api/v1/users/{username}/top/artists?range=months&limit=10",
-                    headers=headers,
-                ).json(),
-                "albums": requests.get(
-                    f"https://api.stats.fm/api/v1/users/{username}/top/albums?range=months&limit=10",
-                    headers=headers,
-                ).json(),
+                "tracks": tracks.json(),
+                "artists": artists.json(),
+                "albums": albums.json(),
             }
         }
     )
 
     res["statsFM"] = json.loads(
-        json.dumps(res["statsFM"]).replace("768x768bb.jpg", "75x75bb.webp")
+        json.dumps(res["statsFM"]).replace(
+            "768x768bb.jpg", "75x75bb.webp"
+        )  # instead of high res lets grab lower res webps to save bandwidth
     )
 
     return res
@@ -223,7 +260,13 @@ async def getBrave(user):
 async def getLeetcode(username):
     data = requests.get(
         f"https://alfa-leetcode-api.onrender.com/userProfile/{username}"
-    ).json()
+    )
+
+    if not data.ok:
+        return {"LeetCode": None}
+    else:
+        data = data.json()
+
     return {
         "LeetCode": {
             "easySolved": data["easySolved"],
@@ -555,9 +598,12 @@ async def getRobloxPlaytime():
 async def getSpotifyStatus():
     data = requests.get(
         f"https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user={os.getenv('LASTFM_USERNAME')}&api_key={os.getenv('LASTFM_AUTH')}&format=json&limit=1"
-    ).json()
+    )
 
-    return {"Spotify": data["recenttracks"]["track"][0]}
+    if not data.ok:
+        return {"Spotify": None}
+
+    return {"Spotify": data.json()["recenttracks"]["track"][0]}
 
 
 async def getBrawl():

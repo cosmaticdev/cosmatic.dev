@@ -371,7 +371,7 @@ let statsFMLastClicked = "fourWeek"
 document.getElementById("fourWeek").style.borderColor = "green";
 
 async function handleStatsFMChange(buttonClicked) {
-    if (buttonClicked == statsFMLastClicked) {
+    if (buttonClicked == statsFMLastClicked || data.statsFM == null) {
         return;
     }
     else {

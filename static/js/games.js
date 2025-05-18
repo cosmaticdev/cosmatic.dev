@@ -124,6 +124,7 @@ function parsePlaytimeData(data) {
         }
     }
 
+
     // Xbox
     const xboxData = data.XboxPlaytime || {};
     for (const [name, game] of Object.entries(xboxData)) {
