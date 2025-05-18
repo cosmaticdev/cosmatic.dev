@@ -97,12 +97,6 @@ async def send_favicon():
     return FileResponse(static_dir / "images/icons/favicon.ico")
 
 
-# temporary
-@app.get("/mobile")
-async def mobile():
-    return "Mobile view is broken and not available yet, sorry! You can view this page on a computer or other bigscreen browser."
-
-
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
@@ -191,7 +185,10 @@ async def fetch_presence():
                         if isinstance(activity, discord.Game):
                             b.update({"playing": [activity.name]})
                             data.update({"playing": [activity.name]})
-                        elif isinstance(activity, discord.Spotify):
+                        else:
+                            data.update({"playing": None})
+                        
+                        if isinstance(activity, discord.Spotify):
                             b.update(
                                 {
                                     "listening": {
@@ -210,28 +207,17 @@ async def fetch_presence():
                                     }
                                 }
                             )
-                        elif isinstance(activity, discord.Streaming):
+                        else:
+                            data.update({"listening": None})
+                        
+                        if isinstance(activity, discord.Streaming):
                             continue
-                        elif isinstance(activity, discord.CustomActivity):
+                        
+                        if isinstance(activity, discord.CustomActivity):
                             b.update({"status": activity.name})
                             data.update({"status": activity.name})
                         else:
-                            b.update(
-                                {
-                                    "activity": {
-                                        "name": activity.name,
-                                        "details": activity.details,
-                                    }
-                                }
-                            )
-                            data.update(
-                                {
-                                    "activity": {
-                                        "name": activity.name,
-                                        "details": activity.details,
-                                    }
-                                }
-                            )
+                            data.update({"status": None})
                 break
         else:
             print("User is not in any mutual servers with the bot.")
