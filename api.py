@@ -72,17 +72,17 @@ async def statsFM(username, userid):
 
     # past 4 week data
     tracks = requests.get(
-        f"https://api.stats.fm/api/v1/users/{username}/top/tracks?range=weeks&limit=10",
+        f"https://api.stats.fm/api/v1/users/{username}/top/tracks?range=weeks&limit=12",
         headers=headers,
     )
 
     artists = requests.get(
-        f"https://api.stats.fm/api/v1/users/{username}/top/artists?range=weeks&limit=10",
+        f"https://api.stats.fm/api/v1/users/{username}/top/artists?range=weeks&limit=12",
         headers=headers,
     )
 
     albums = requests.get(
-        f"https://api.stats.fm/api/v1/users/{username}/top/albums?range=weeks&limit=11",
+        f"https://api.stats.fm/api/v1/users/{username}/top/albums?range=weeks&limit=13",
         headers=headers,
     )
 
@@ -108,17 +108,17 @@ async def statsFM(username, userid):
     start_of_saturday_timestamp = int(start_of_saturday.timestamp() + 60 * 60 * 24)
 
     tracks = requests.get(
-        f"https://api.stats.fm/api/v1/users/{userid}/top/tracks?after={start_of_saturday_timestamp}000&before={int(start_of_saturday_timestamp + 60 * 60 * 24 * 7 - 1)}999&limit=10",
+        f"https://api.stats.fm/api/v1/users/{userid}/top/tracks?after={start_of_saturday_timestamp}000&before={int(start_of_saturday_timestamp + 60 * 60 * 24 * 7 - 1)}999&limit=12",
         headers=headers,
     )
 
     artists = requests.get(
-        f"https://api.stats.fm/api/v1/users/{userid}/top/artists?after={start_of_saturday_timestamp}000&before={int(start_of_saturday_timestamp + 60 * 60 * 24 * 7 - 1)}999&limit=10",
+        f"https://api.stats.fm/api/v1/users/{userid}/top/artists?after={start_of_saturday_timestamp}000&before={int(start_of_saturday_timestamp + 60 * 60 * 24 * 7 - 1)}999&limit=12",
         headers=headers,
     )
 
     albums = requests.get(
-        f"https://api.stats.fm/api/v1/users/{userid}/top/albums?after={start_of_saturday_timestamp}000&before={int(start_of_saturday_timestamp + 60 * 60 * 24 * 7 - 1)}999&limit=11",
+        f"https://api.stats.fm/api/v1/users/{userid}/top/albums?after={start_of_saturday_timestamp}000&before={int(start_of_saturday_timestamp + 60 * 60 * 24 * 7 - 1)}999&limit=13",
         headers=headers,
     )
 
@@ -137,17 +137,17 @@ async def statsFM(username, userid):
 
     # past 6 months data
     tracks = requests.get(
-        f"https://api.stats.fm/api/v1/users/{username}/top/tracks?range=months&limit=10",
+        f"https://api.stats.fm/api/v1/users/{username}/top/tracks?range=months&limit=12",
         headers=headers,
     )
 
     artists = requests.get(
-        f"https://api.stats.fm/api/v1/users/{username}/top/artists?range=months&limit=10",
+        f"https://api.stats.fm/api/v1/users/{username}/top/artists?range=months&limit=12",
         headers=headers,
     )
 
     albums = requests.get(
-        f"https://api.stats.fm/api/v1/users/{username}/top/albums?range=months&limit=10",
+        f"https://api.stats.fm/api/v1/users/{username}/top/albums?range=months&limit=13",
         headers=headers,
     )
 

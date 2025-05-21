@@ -401,7 +401,23 @@ async function statsFMUpdate(period) {
     let container = document.getElementById("artist-container");
     container.innerHTML = '<h3>Artists</h3>';
 
+    // remove the duplicates that stats.fm loves adding
+    let map = new Map();
+
     for (const item of data.statsFM[period].artists.items) {
+        const name = item.artist.name;
+        const existing = map.get(name);
+
+        if (!existing || item.playedMs > existing.playedMs) {
+            map.set(name, item);
+        } else {
+            console.log("removed dupe artist: " + item.artist.name)
+        }
+    }
+
+    data.statsFM[period].artists.items = Array.from(map.values());
+
+    for (const item of data.statsFM[period].artists.items.slice(0, 10)) {
         const rowDiv = document.createElement("div");
         rowDiv.style.display = "flex";
         rowDiv.style.alignItems = "flex-start";
@@ -442,9 +458,26 @@ async function statsFMUpdate(period) {
     container = document.getElementById("tracks-container");
     container.innerHTML = '<h3 style="padding-left: 55px">Tracks</h3>';
 
-    let pos = 1;
+    // remove the duplicates that stats.fm loves adding
+    map = new Map();
 
     for (const item of data.statsFM[period].tracks.items) {
+        const name = item.track.name;
+        const existing = map.get(name);
+
+        if (!existing || item.playedMs > existing.playedMs) {
+            map.set(name, item);
+        } else {
+            console.log("removed dupe track: " + item.track.name)
+        }
+    }
+
+    data.statsFM[period].tracks.items = Array.from(map.values());
+
+
+    let pos = 1;
+
+    for (const item of data.statsFM[period].tracks.items.slice(0, 10)) {
         const rowDiv = document.createElement("div");
         rowDiv.style.display = "flex";
         rowDiv.style.alignItems = "flex-start";
@@ -511,7 +544,23 @@ async function statsFMUpdate(period) {
     container = document.getElementById("album-container");
     container.innerHTML = '<h3>Albums</h3>';
 
+    // remove the duplicates that stats.fm loves adding
+    map = new Map();
+
     for (const item of data.statsFM[period].albums.items) {
+        const name = item.album.name;
+        const existing = map.get(name);
+
+        if (!existing || item.playedMs > existing.playedMs) {
+            map.set(name, item);
+        } else {
+            console.log("removed dupe album: " + item.album.name)
+        }
+    }
+
+    data.statsFM[period].albums.items = Array.from(map.values());
+
+    for (const item of data.statsFM[period].albums.items.slice(0, 10)) {
         const rowDiv = document.createElement("div");
         rowDiv.style.display = "flex";
         rowDiv.style.alignItems = "flex-start";
