@@ -188,28 +188,6 @@ async def fetch_presence():
                         else:
                             data.update({"playing": None})
 
-                        if isinstance(activity, discord.Spotify):
-                            b.update(
-                                {
-                                    "listening": {
-                                        "songName": activity.title,
-                                        "artist": activity.artists,
-                                        "album": activity.album,
-                                    }
-                                }
-                            )
-                            data.update(
-                                {
-                                    "listening": {
-                                        "songName": activity.title,
-                                        "artist": activity.artists,
-                                        "album": activity.album,
-                                    }
-                                }
-                            )
-                        else:
-                            data.update({"listening": None})
-
                         if isinstance(activity, discord.Streaming):
                             continue
 
