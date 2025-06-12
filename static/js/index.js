@@ -723,5 +723,5 @@ async function loadRepo(input) {
 
 // define repos to be loaded
 loadRepo("https://www.github.com/cosmaticdev/cosmatic.dev");
-loadRepo("https://www.github.com/cosmaticdev/pld-embeds");
+loadRepo("https://github.com/cosmaticdev/ICYMI-Medal-Trackmania");
 loadRepo("https://github.com/cosmaticdev/MedalLocalBackup");
