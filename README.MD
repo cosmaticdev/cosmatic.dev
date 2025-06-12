@@ -24,7 +24,7 @@ Please note that this project is not finished, there is still more stuff in the 
 ## Rundown on data collected:
 - Steam playtime (& game icons)
 - Xbox playtime and achievements (& game icons)
-- Ubisoft playtime for specified games
+- Ubisoft playtime for specified games (currently down as Ubisoft has broken their API)
 - Tracks Roblox playtime live
 - Tracks Spotify top streamed songs (via stats.fm)
 - Tracks live Spotify streams (via last.fm)
