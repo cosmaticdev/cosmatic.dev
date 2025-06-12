@@ -261,7 +261,7 @@ async def roblox_presence():
             )
             data["playtime"] += 30
 
-            if response["rootPlaceId"] != currentExperience:
+            if str(response["rootPlaceId"]) != currentExperience:
                 data["sessions"] += 1
                 currentExperience = str(response["rootPlaceId"])
                 data["lastGame"] = currentExperience
