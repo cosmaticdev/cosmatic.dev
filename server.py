@@ -285,6 +285,37 @@ async def roblox_presence():
         with open("static/data/roblox.json", "w") as f:
             f.write(json.dumps(data, indent=2))
 
+        # get icons for games
+        sorted_games = sorted(
+            data["Roblox"]["games"].items(),
+            key=lambda item: item[1]["playtime"],
+            reverse=True,
+        )
+
+        payload = [
+            {
+                "requestId": f"{game_id}::GameIcon:256x256:webp:regular",
+                "type": "GameIcon",
+                "targetId": int(game_id),
+                "token": "",
+                "format": "webp",
+                "size": "256x256",
+            }
+            for game_id, _ in sorted_games[:20]  # get images for top 20 playtime games
+        ]
+
+        resp = requests.post(
+            "https://thumbnails.roblox.com/v1/batch",
+            headers=headers,
+            cookies=cookies,
+            json=payload,
+        )
+
+        print("Status code:", resp.status_code)
+        print("Response JSON:", resp.json())
+
+        # TODO: load the images from json and downlaod (working on fixing auth methods right now)
+
         await asyncio.sleep(30)
 
 
@@ -293,7 +324,9 @@ async def on_ready():
     print(f"Logged in as {client.user}")
     await client.get_channel(int(os.getenv("DISCORD_CHANNEL"))).send("We are so back")
     asyncio.create_task(fetch_presence())
-    asyncio.create_task(roblox_presence())  # bundle roblox bot with discord bot
+
+    # need persistant login rather than expiring cookie
+    # asyncio.create_task(roblox_presence())  # bundle roblox bot with discord bot
 
 
 def run_discord_bot():

@@ -104,24 +104,29 @@ function parsePlaytimeData(data) {
     const gameStats = {};
 
     // Steam
+    // fails semi-often because the steam api is not super consistant
     const steamGames = data.steam || [];
-    for (const game of steamGames) {
-        const playtimeMin = safeInt(game.playtime_forever);
-        if ((showZeroPlaytime) || (playtimeMin != 0)) {
-            const name = (game.name || "").trim();
-            const appid = game.appid;
-            const key = name;
-            const imUrl = "/static/images/steamThumbnails/" + game.img_icon_url + ".jpg"
+    if (steamGames.length != 0) {
+        for (const game of steamGames) {
+            const playtimeMin = safeInt(game.playtime_forever);
+            if ((showZeroPlaytime) || (playtimeMin != 0)) {
+                const name = (game.name || "").trim();
+                const appid = game.appid;
+                const key = name;
+                const imUrl = "/static/images/steamThumbnails/" + game.img_icon_url + ".jpg"
 
-            if (!gameStats[key]) {
-                gameStats[key] = { playtime: 0, platforms: new Set(), ids: [] };
+                if (!gameStats[key]) {
+                    gameStats[key] = { playtime: 0, platforms: new Set(), ids: [] };
+                }
+
+                gameStats[key].playtime += playtimeMin;
+                gameStats[key].platforms.add("Steam");
+                gameStats[key].imUrl = imUrl;
+                gameStats[key].ids.push(appid);
             }
-
-            gameStats[key].playtime += playtimeMin;
-            gameStats[key].platforms.add("Steam");
-            gameStats[key].imUrl = imUrl;
-            gameStats[key].ids.push(appid);
         }
+    } else {
+        console.warn("Failed to load steam games!");
     }
 
 
@@ -179,7 +184,9 @@ function parsePlaytimeData(data) {
 
     // Roblox
     // WIP
-    document.getElementById("robloxText").textContent = `Roblox playtime (since May, 2025): ${formatTime(data.Roblox.playtime)}`
+    if (data.Roblox) {
+        document.getElementById("robloxText").textContent = `Roblox playtime (since May, 2025): ${formatTime(data.Roblox.playtime)}`
+    }
 
     // Convert and sort
     const result = Object.entries(gameStats).map(([name, info]) => ({

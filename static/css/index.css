@@ -390,8 +390,7 @@ button:hover {
     background-color: var(--button-hover);
 }
 
-
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1500px) {
     html {
         font-size: 14px;
         /* Scale down base size */
@@ -418,31 +417,36 @@ button:hover {
         font-size: 0.95rem;
         /* ~13.5px */
     }
+}
 
-    .record-wrapper,
+@media only screen and (max-width: 1500px) {
     .record-container {
-        width: 300px;
-        height: 300px;
-    }
-
-    .label {
-        width: 150px;
-        height: 150px;
-    }
-
-    .record-text {
-        font-size: 1rem;
+        display: none;
     }
 
     .bloom {
-        width: 350px;
-        height: 350px;
+        display: none;
     }
 
-    .circle-image {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        object-fit: cover;
+    .record-text {
+        display: none;
+    }
+
+    #gamesAndShowsDisplay {
+        display: none;
+    }
+}
+
+@media only screen and (max-height: 1000px) {
+    .record-container {
+        display: none;
+    }
+
+    .bloom {
+        display: none;
+    }
+
+    .record-text {
+        display: none;
     }
 }

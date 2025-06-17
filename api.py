@@ -585,7 +585,7 @@ async def downloadSteamThumbnails(data):
                     "wb",
                 ) as file:
                     file.write(response.content)
-                print(f"{'title'} image downloaded successfully.")
+                print(f"SteamID {i['appid']} image downloaded successfully.")
             else:
                 print("Failed to retrieve the image.")
 
