@@ -495,7 +495,6 @@ async def getXboxGamePlaytime():
                                 }
                             }
                         )
-                        gamescore += int(score_x_y[1].split(" / ")[0].replace(",", ""))
                     elif (hours != None) or (minutes != None): # if theres already a game with that name we can combine the playtimes
                         games[game_name]["minutes"] += minutes
                         if (games[game_name]["minutes"] >= 60):
@@ -503,6 +502,7 @@ async def getXboxGamePlaytime():
                             games[game_name]["minutes"] -= 60
                         else:
                             games[game_name]["hours"] += hours
+                    gamescore += int(score_x_y[1].split(" / ")[0].replace(",", "")) # some older xbox games dont track playtime. register their gamescore anyways
             page += 1
             print(f"finished loading trueachievements page {page}")
 
