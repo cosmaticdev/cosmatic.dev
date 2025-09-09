@@ -615,9 +615,22 @@ async def getSpotifyStatus():
 
 async def getBrawl():
     async with async_playwright() as p:
-        browser = await p.chromium.launch()
-        page = await browser.new_page()
+        headers = {
+            "sec-ch-ua-platform": '"Windows"',
+            "Referer": "https://brawlace.com/",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+            "Accept": "application/json, text/plain, */*",
+            "sec-ch-ua": '"Chromium";v="136", "Brave";v="136", "Not.A/Brand";v="99"',
+            "sec-ch-ua-mobile": "?0",
+        }
+
+        browser = await p.chromium.launch(headless=True)
+        context = await browser.new_context(extra_http_headers=headers)
+        page = await context.new_page()
         await page.goto(f"https://brawlace.com/players/{os.getenv('BRAWL_STARS_TAG')}")
+
+        time.sleep(5)
+
         content = await page.content()
         await browser.close()
         html = content
