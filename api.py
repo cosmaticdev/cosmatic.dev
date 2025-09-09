@@ -556,7 +556,7 @@ async def getSteamPlaytime():
         z = json.loads(f.read())
 
     z = {
-        str(app["appid"]): app["name"]
+        str(app["appid"]): app["name"].replace("®", "").replace(" (Nintendo Switch)", "").replace(" (iOS)", "").replace(" (Android)", "w").replace(" (Windows)", "") # remove platform indicators
         for app in sorted(z["applist"]["apps"], key=lambda x: str(x["appid"]))
     }
 
