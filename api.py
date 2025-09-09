@@ -459,7 +459,7 @@ async def getXboxGamePlaytime():
                     img_url = img["src"] if img else None
 
                     game_name = row.find("td", class_="smallgame")
-                    game_name = game_name.text.strip() if game_name else None
+                    game_name = game_name.text.strip().replace("®", "").replace(" (Nintendo Switch)", "").replace(" (iOS)", "").replace(" (Android)", "w").replace(" (Windows)", "").replace(" (Xbox One)", ) if game_name else None
 
                     time_played = row.find("td", class_="date")
                     if time_played:
@@ -496,6 +496,13 @@ async def getXboxGamePlaytime():
                             }
                         )
                         gamescore += int(score_x_y[1].split(" / ")[0].replace(",", ""))
+                    elif (hours != None) or (minutes != None): # if theres already a game with that name we can combine the playtimes
+                        games[game_name]["minutes"] += minutes
+                        if (games[game_name]["minutes"] >= 60):
+                            games[game_name]["hours"] += hours + 1
+                            games[game_name]["minutes"] -= 60
+                        else:
+                            games[game_name]["hours"] += hours
             page += 1
             print(f"finished loading trueachievements page {page}")
 
@@ -556,13 +563,13 @@ async def getSteamPlaytime():
         z = json.loads(f.read())
 
     z = {
-        str(app["appid"]): app["name"].replace("®", "").replace(" (Nintendo Switch)", "").replace(" (iOS)", "").replace(" (Android)", "w").replace(" (Windows)", "") # remove platform indicators
+        str(app["appid"]): app["name"]
         for app in sorted(z["applist"]["apps"], key=lambda x: str(x["appid"]))
     }
 
     for i in range(len(data) - 1):
         try:
-            data[i].update({"title": z[str(data[i]["appid"])]})
+            data[i].update({"title": (z[str(data[i]["appid"])]).replace("®", "").replace(" (Nintendo Switch)", "").replace(" (iOS)", "").replace(" (Android)", "w").replace(" (Windows)", "").replace(" (Xbox One)", "")})
         except:
             continue
 
